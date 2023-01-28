@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "Orders")
 public class Order {
 	
@@ -26,17 +26,19 @@ public class Order {
 	
 	//cartItem
 	private String productName;
-	private Integer price;
-	private Integer qty;
+	private Double price;
+	private Integer quantity;
 	//mainOrder
 	private Double subTotal;
 	private Double shippingCost;
 	private Double grandTotal;
 	private LocalDate orderDate;
+	private LocalDate onUpdateOrder;
 	private String customerName;
 	
-	@Email(message = "Customer must be Email.")
-	private String customerEmail;
+	@Email(message = "Email must be email.")
+	private String email;
+	private String phone;
 	private String status = "active";
 	//shippingAddress
 	private String street;
@@ -47,6 +49,11 @@ public class Order {
 	@PrePersist
 	void onOrderDate() {
 		this.orderDate = LocalDate.now();
+	}
+	
+	@PreUpdate
+	void onUpdateOrder() {
+		this.onUpdateOrder = LocalDate.now();
 	}
 	
 

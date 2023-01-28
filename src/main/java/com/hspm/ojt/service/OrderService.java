@@ -13,7 +13,7 @@ public interface OrderService {
 	
 	List<Order> findAll();
 	
-//	void flashDelete(Long id);
+	void flashDelete(Long id);
 	
 	
 

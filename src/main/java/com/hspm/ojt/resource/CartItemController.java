@@ -38,6 +38,7 @@ public class CartItemController {
 	@GetMapping("/all")
 	public List<CartItem> findAll(){
 		
+		
 		return cartItemService.findAll();
 	}
 

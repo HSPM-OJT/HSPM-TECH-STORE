@@ -1,15 +1,10 @@
 package com.hspm.ojt;
-
-
-
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-
-@SpringBootApplication
+@SpringBootApplication 
 public class HspmStoreApplication implements CommandLineRunner{
 	
 //	@Autowired
@@ -27,7 +22,4 @@ public class HspmStoreApplication implements CommandLineRunner{
 //		User user1 = new User("pan@gmail.com", "Pan","Thu Kyaw", "09969610229", "12345678");
 //		userService.saveOrUpdateUser(user1);
 	}
-	
-
-
 }

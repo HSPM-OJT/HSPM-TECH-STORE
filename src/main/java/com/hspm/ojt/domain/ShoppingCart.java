@@ -10,19 +10,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class CartItem {
+public class ShoppingCart {
 	
-	//List
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Long productId; //join table //product list
-	private Long shoppingCartId; //join talbe
-	
-	private Integer quantity;
-	private Double price;
+	private Long cartId;
+	private Long userId;
 	private Double subTotal;
-	private Long orderId;
+	private Double grandTotal;
 
 }

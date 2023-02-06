@@ -12,5 +12,5 @@ public interface UserService {
 	Optional<User> findById(Long id);
 	Optional<User> findByEmail(String email);
 	User createUser(User user);
-	void flashDelete(Long id);
+	void flashDelete(String email);
 }

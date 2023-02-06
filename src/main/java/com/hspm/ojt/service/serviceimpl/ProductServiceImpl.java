@@ -1,4 +1,4 @@
-package com.hspm.ojt.domain.service.serviceImpl;
+package com.hspm.ojt.service.serviceimpl;
 
 import java.util.List;
 import java.util.Optional;

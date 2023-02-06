@@ -17,8 +17,7 @@ public class HspmStoreApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-	
-		
+
 //		User user1 = new User("pan@gmail.com", "Pan","Thu Kyaw", "09969610229", "12345678");
 //		userService.saveOrUpdateUser(user1);
 	}

@@ -30,17 +30,21 @@ public class UserServiceImpl implements UserService{
 	public User saveOrUpdateUser(User user) {
 		// TODO Auto-generated method stub
 //		Optional<User> userOpt = userRepository.findById(user.getId());
+
+		
+//		Optional<User> userOpt = userRepository.findByEmail(user.getEmail());
 //		if(userOpt.isEmpty())
 //			throw new EmailNotFoundException("Email with id"+user+"is noy found");
-		
-		
+//		if(userOpt.isPresent())
+//			user.setEmail(userOpt.get().getEmail());
+
 		return userRepository.save(user);
 	}
 
 	@Override
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
-		List<User> activeUser = (List<User>) userRepository.findAll()/*.stream().filter(u -> u.getStatus().equals("active")).toList()*/;
+		List<User> activeUser = (List<User>) userRepository.findAll();
 		return activeUser;
 
 	}
@@ -71,20 +75,19 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void flashDelete(Long id) {
+	public void flashDelete(String email) {
 		// TODO Auto-generated method stub
-		Optional<User> userOpt = userRepository.getUserById(id);
+		Optional<User> userOpt = userRepository.findByEmail(email);
 		
 		if(userOpt.isEmpty())
-			throw new EmailAlreadyExistException("User with id"+id+"is not found");
+			throw new EmailNotFoundException("User with email"+email+"is not found");
 		
-		User user = userOpt.get();
+		User user = userOpt.get();;
 		
 		user.setStatus("deleted");
 		userRepository.save(user);
 		
 	}
-	
-	
+
 
 }

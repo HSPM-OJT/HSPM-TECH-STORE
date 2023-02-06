@@ -1,6 +1,7 @@
 package com.hspm.ojt.resource;
 
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -108,22 +111,29 @@ private static final String TOKEN_PREFIX = "Bearer ";
 		return new ResponseEntity<User>(createdUser,HttpStatus.CREATED);
 		
 	}
-	
+	@PostMapping("/update")
+	public ResponseEntity<?> updateUser(@Valid @RequestBody User user,BindingResult result){
+		userValidator.validate(user, result);
+		
+		ResponseEntity<?> errorResponse = mapErrorService.validate(result);
+		
+		if(errorResponse != null)
+			return errorResponse;
+		
+		User updatedUser = userService.saveOrUpdateUser(user);
+		
+		return new ResponseEntity<User>(updatedUser,HttpStatus.OK);
+	}
 	@GetMapping("/all")
 	public ResponseEntity<?> findAllUser(){
 		List<User> userList = userService.findAll();
-		
-		if(userList.isEmpty())
-			return new ResponseEntity<String>("no users exists in your account", HttpStatus.NOT_FOUND);
-		
 		return new ResponseEntity<List<User>>(userList,HttpStatus.OK);
 	}
-	@DeleteMapping("/id/{id}")
-	public ResponseEntity<Long> flashDelete(@PathVariable Long id){
-		userService.flashDelete(id);
-		return new ResponseEntity<Long>(id,HttpStatus.OK);
+	@DeleteMapping("/email/{email}")
+	public ResponseEntity<String> flashDelete(@PathVariable String email){
+		userService.flashDelete(email);
+		return new ResponseEntity<String>(email,HttpStatus.OK);
 	}
-	
 
 
 }

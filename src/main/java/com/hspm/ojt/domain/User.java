@@ -62,7 +62,18 @@ public class User implements UserDetails{
 	
 	private Users role = Users.CUSTOMER;
 	
-
+	public User(@Email(message = "This place must be email") @NotBlank(message = "Email is required") String email,
+			@NotBlank(message = "First Name is required") String fname,
+			@NotBlank(message = "Last Name is required") String lname,
+			@NotBlank(message = "PhoneNumber is required") String phoneNumber,
+			@NotBlank(message = "Password is requird") String password) {
+		super();
+		this.email = email;
+		this.fname = fname;
+		this.lname = lname;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+	}
 	
 	
 	@PrePersist
@@ -123,18 +134,7 @@ public class User implements UserDetails{
 		return true;
 	}
 
-	public User(@Email(message = "This place must be email") @NotBlank(message = "Email is required") String email,
-			@NotBlank(message = "First Name is required") String fname,
-			@NotBlank(message = "Last Name is required") String lname,
-			@NotBlank(message = "PhoneNumber is required") String phoneNumber,
-			@NotBlank(message = "Password is requird") String password) {
-		super();
-		this.email = email;
-		this.fname = fname;
-		this.lname = lname;
-		this.phoneNumber = phoneNumber;
-		this.password = password;
-	}
+
 
 	
 
